@@ -1,0 +1,33 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main # run on every push to main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # fresh Linux VM each run
+
+    environment:
+      name: github-pages # required by the deploy step
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7 # copies your files to the VM
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6 # supplies the site's URL
+
+      - name: Build the site
+        uses: actions/jekyll-build-pages@v1 # markdown in, HTML out
+
+      - name: Upload the built site
+        uses: actions/upload-pages-artifact@v5 # packages the HTML for Pages
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v5 # publishes to your live URL
