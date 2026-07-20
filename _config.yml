@@ -1,0 +1,4 @@
+title: COMP1023 Internal Documentation
+description: A small static site deployed automatically with GitHub Actions.
+theme: jekyll-theme-minimal
+show_downloads: false
